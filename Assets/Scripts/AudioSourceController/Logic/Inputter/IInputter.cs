@@ -4,7 +4,7 @@ namespace AudioSourceController.Logic.Inputter
 {
     public interface IInputter
     {
-         bool Effect1KeyDown();
-         bool Effect1KeyUp();
+         bool Effect1Trigger();
+         bool Effect1TriggerEnd();
     }
 }

@@ -15,11 +15,11 @@ namespace AudioSourceController.Controller.Audio.Effecter
         }
         public void ControlTapeStop()
         {
-            if (inputter.Effect1KeyDown())
+            if (inputter.Effect1Trigger())
             {
                 effecter.ApplyTapeStop();
             }
-            else if (inputter.Effect1KeyUp())
+            else if (inputter.Effect1TriggerEnd())
             {
                 effecter.ResetPitch();
             }
