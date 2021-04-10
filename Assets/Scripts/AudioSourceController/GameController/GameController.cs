@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using AudioSourceController.Audio.Effecter;
+using AudioSourceController.Controller.Audio.Effecter;
 using UnityEngine;
 using Zenject;
 

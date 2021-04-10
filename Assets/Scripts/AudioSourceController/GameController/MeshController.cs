@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
-using AudioSourceController.Audio.Loader;
+using AudioSourceController.Domains.Mp3Tag;
+using AudioSourceController.Repository.Audio.Loader;
+using AudioSourceController.Repository.Mp3Tag.Loader;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;

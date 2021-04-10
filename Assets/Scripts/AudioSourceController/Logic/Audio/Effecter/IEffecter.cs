@@ -1,4 +1,4 @@
-namespace AudioSourceController.Audio.Effecter
+namespace AudioSourceController.Logic.Audio.Effecter
 {
     public interface IEffecter
     {

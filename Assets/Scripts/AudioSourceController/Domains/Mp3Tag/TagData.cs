@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AudioSourceController.Audio.Loader
+namespace AudioSourceController.Domains.Mp3Tag
 {
     public class TagData
     {

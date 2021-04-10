@@ -3,8 +3,9 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.Threading.Tasks;
 using System;
+using AudioSourceController.Domains.Mp3Tag;
 
-namespace AudioSourceController.Audio.Loader
+namespace AudioSourceController.Repository.Mp3Tag.Loader
 {
     public class TagLoader : ITagLoader
     {

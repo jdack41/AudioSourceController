@@ -1,9 +1,11 @@
-using AudioSourceController.Audio.Effecter;
-using AudioSourceController.Inputter;
 using Zenject;
 using UnityEngine;
-using AudioSourceController.Audio.Loader;
 using AudioSourceController.Domains.Audio;
+using AudioSourceController.Logic.Inputter;
+using AudioSourceController.Logic.Audio.Effecter;
+using AudioSourceController.Controller.Audio.Effecter;
+using AudioSourceController.Repository.Audio.Loader;
+using AudioSourceController.Repository.Mp3Tag.Loader;
 
 namespace AudioSourceController.Installer
 {

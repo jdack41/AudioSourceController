@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace AudioSourceController.Audio.Loader
+namespace AudioSourceController.Repository.Audio.Loader
 {
     public interface IAudioLoader
     {

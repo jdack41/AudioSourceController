@@ -1,9 +1,9 @@
-using System.Threading.Tasks;
+using AudioSourceController.Repository.Mp3Tag.Loader;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace AudioSourceController.Audio.Loader
+namespace AudioSourceController.Repository.Audio.Loader
 {
     public class Mp3AudioLoader : IAudioLoader
     {

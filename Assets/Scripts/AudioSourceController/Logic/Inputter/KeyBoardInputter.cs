@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AudioSourceController.Inputter
+namespace AudioSourceController.Logic.Inputter
 {
     public class KeyBoardInputter : IInputter
     {

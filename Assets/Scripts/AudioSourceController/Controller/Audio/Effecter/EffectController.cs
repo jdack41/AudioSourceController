@@ -1,6 +1,7 @@
-using AudioSourceController.Inputter;
+using AudioSourceController.Logic.Audio.Effecter;
+using AudioSourceController.Logic.Inputter;
 
-namespace AudioSourceController.Audio.Effecter
+namespace AudioSourceController.Controller.Audio.Effecter
 {
     public class EffectController : IEffectController
     {

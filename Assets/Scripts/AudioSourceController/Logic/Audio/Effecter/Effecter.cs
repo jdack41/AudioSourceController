@@ -1,7 +1,7 @@
 using AudioSourceController.Domains.Audio;
 using UnityEngine;
 
-namespace AudioSourceController.Audio.Effecter
+namespace AudioSourceController.Logic.Audio.Effecter
 {
     public class Effecter : IEffecter
     {
