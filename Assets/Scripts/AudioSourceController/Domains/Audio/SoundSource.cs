@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace AudioSourceController.Audio
+namespace AudioSourceController.Domains.Audio
 {
-    public class SoundSource : IAudio
+    public class SoundSource : ISoundSource
     {
         private readonly AudioSource audioSource;
 

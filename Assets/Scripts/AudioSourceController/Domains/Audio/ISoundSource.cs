@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace AudioSourceController.Audio
+namespace AudioSourceController.Domains.Audio
 {
-    public interface IAudio
+    public interface ISoundSource
     {
         public string ClipName { get; set; }
 

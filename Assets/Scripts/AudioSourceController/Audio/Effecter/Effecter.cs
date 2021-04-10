@@ -1,26 +1,27 @@
+using AudioSourceController.Domains.Audio;
 using UnityEngine;
 
 namespace AudioSourceController.Audio.Effecter
 {
     public class Effecter : IEffecter
     {
-        private readonly IAudio audio;
+        private readonly ISoundSource soundSource;
 
-        public Effecter(IAudio audio)
+        public Effecter(ISoundSource soundSource)
         {
-            this.audio = audio;
+            this.soundSource = soundSource;
         }
 
         public void ApplyTapeStop()
         {
-            if (audio.Pitch > 0) {
-                audio.Pitch -= 0.005f;
+            if (soundSource.Pitch > 0) {
+                soundSource.Pitch -= 0.005f;
             }
         }
 
         public void ResetPitch() 
         {
-            audio.Pitch = 1;
+            soundSource.Pitch = 1;
         }
 
     }
