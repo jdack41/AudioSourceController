@@ -60,17 +60,6 @@ namespace AudioSourceController.Controller.Audio.Effecter
             .Where(_ => inputter.Effect1TriggerEnd())
             .Subscribe(_ => effecter.ResetPitch());
         }
-
-        public void ControlTapeStop()
-        {
-            if (inputter.Effect1Trigger())
-            {
-                effecter.ApplyTapeStop();
-            }
-            else if (inputter.Effect1TriggerEnd())
-            {
-                effecter.ResetPitch();
-            }
-        }
+        
     }
 }
