@@ -6,5 +6,7 @@ namespace AudioSourceController.Logic.Inputter
     {
          bool Effect1Trigger();
          bool Effect1TriggerEnd();
+         bool Effect2Trigger();
+         bool Effect2TriggerEnd();
     }
 }

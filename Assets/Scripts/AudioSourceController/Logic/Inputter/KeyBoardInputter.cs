@@ -13,5 +13,15 @@ namespace AudioSourceController.Logic.Inputter
         {
             return Input.GetKeyUp(KeyCode.A);
         }
+
+        public bool Effect2Trigger()
+        {
+            return Input.GetKey(KeyCode.S);
+        }
+
+        public bool Effect2TriggerEnd()
+        {
+            return Input.GetKeyUp(KeyCode.S);
+        }
     }
 }
