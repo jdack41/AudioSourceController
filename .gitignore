@@ -63,3 +63,6 @@ crashlytics-build.properties
 
 # Mac ds_store
 .DS_Store
+
+# ci directory
+**/artifacts/
