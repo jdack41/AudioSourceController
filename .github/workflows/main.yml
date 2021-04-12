@@ -28,9 +28,9 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: ${{ matrix.projectPath }}/Library
-          key: Library-PatiSlot-${{ matrix.targetPlatform }}
+          key: Library-AudioSourceController-${{ matrix.targetPlatform }}
           restore-keys: |
-            Library-PatiSlot-
+            Library-AudioSourceController-
             Library-
       - uses: game-ci/unity-test-runner@v2
         id: testRunner
