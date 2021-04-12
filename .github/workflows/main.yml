@@ -3,7 +3,40 @@ name: Test and Build Actions 😎
 on: [pull_request]
 
 jobs:
-  buildAndTestForSomePlatforms:
+  test:
+    name: Build for ${{ matrix.targetPlatform }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: true
+      - uses: actions/cache@v2.1.3
+        with:
+          path: /Library
+          key: Library-AudioSourceController-${{ matrix.targetPlatform }}
+          restore-keys: |
+            Library-AudioSourceController-
+            Library-
+      - uses: game-ci/unity-test-runner@v2
+        id: testRunner
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          projectPath: ${{ matrix.projectPath }}
+          unityVersion: ${{ matrix.unityVersion }}
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+          customParameters: "-nographics"
+      - uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: Test results (all modes)
+          path: ${{ steps.testRunner.outputs.artifactsPath }}
+      - uses: sarisia/actions-status-discord@v1
+        if: always()
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+  build:
+    needs: [test]
     name: Build for ${{ matrix.targetPlatform }}
     runs-on: ubuntu-latest
     strategy:
@@ -31,14 +64,6 @@ jobs:
           restore-keys: |
             Library-AudioSourceController-
             Library-
-      - uses: game-ci/unity-test-runner@v2
-        id: testRunner
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          projectPath: ${{ matrix.projectPath }}
-          unityVersion: ${{ matrix.unityVersion }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v2
         if: always()
         with:
@@ -51,8 +76,6 @@ jobs:
           projectPath: ${{ matrix.projectPath }}
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
-          versioning: Semantic
-          allowDirtyBuild: true
       - uses: actions/upload-artifact@v2
         with:
           name: Build
