@@ -52,6 +52,7 @@ jobs:
           unityVersion: ${{ matrix.unityVersion }}
           targetPlatform: ${{ matrix.targetPlatform }}
           versioning: Semantic
+          allowDirtyBuild: true
       - uses: actions/upload-artifact@v2
         with:
           name: Build
