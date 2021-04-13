@@ -1,23 +1,23 @@
 using System;
 using AudioSourceController.Domains.Mp3Tag;
 using AudioSourceController.Repository.Audio.Loader;
-using AudioSourceController.Repository.Mp3Tag.Loader;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using UniRx;
 using UniRx.Triggers;
+using AudioSourceController.Repository.TrackDisplays;
 
 public class MeshController : MonoBehaviour
 {
-    private ITagLoader tagLoader;
+    private ITrackDisplaysRepository trackDisplaysRepository;
     private IAudioLoader audioLoader;
     private AudioSource audioSource;
 
     [Inject]
-    public void Construct(ITagLoader tagLoader, IAudioLoader audioLoader, AudioSource audioSource)
+    public void Construct(ITrackDisplaysRepository trackDisplaysRepository, IAudioLoader audioLoader, AudioSource audioSource)
     {
-        this.tagLoader = tagLoader;
+        this.trackDisplaysRepository = trackDisplaysRepository;
         this.audioLoader = audioLoader;
         this.audioSource = audioSource;
     }
@@ -32,12 +32,13 @@ public class MeshController : MonoBehaviour
     {
         try
         {
-            TagData data = await tagLoader.ReadTags("/Users/s-shimada/Temp/DIVE.mp3");
+            TagData data = await trackDisplaysRepository.ReadTags("/Users/s-shimada/Temp/DIVE.mp3");
             this.gameObject.GetComponent<Renderer>().material.mainTexture = data.JacketImage;
         }
-        catch (Exception)
+        catch (Exception e)
         {
             Debug.LogWarning("Sytem Error");
+            Debug.LogWarning(e.Message);
         }
     }
 
@@ -47,9 +48,10 @@ public class MeshController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             await initialize();
-            AudioClip clip = await audioLoader.LoadClip("/Users/s-shimada/Temp/DIVE.mp3");
+            AudioClip clip = await audioLoader.LoadClip("DIVE");
             audioSource.clip = clip;
-            audioSource.Play();
+            // audioSource.Play();
+            await trackDisplaysRepository.LoadTrackDisplays();
         }
     }
 }

@@ -5,7 +5,7 @@ using AudioSourceController.Logic.Inputter;
 using AudioSourceController.Logic.Audio.Effecter;
 using AudioSourceController.Controller.Audio.Effecter;
 using AudioSourceController.Repository.Audio.Loader;
-using AudioSourceController.Repository.Mp3Tag.Loader;
+using AudioSourceController.Repository.TrackDisplays;
 
 namespace AudioSourceController.Installer
 {
@@ -18,7 +18,7 @@ namespace AudioSourceController.Installer
             Container.Bind<IInputter>().To<KeyBoardInputter>().AsSingle();
             Container.Bind<IEffecter>().To<Effecter>().AsSingle();
             Container.Bind<IEffectController>().To<EffectController>().AsSingle();
-            Container.Bind<ITagLoader>().To<TagLoader>().AsSingle();
+            Container.Bind<ITrackDisplaysRepository>().To<TrackDisplaysRepository>().AsSingle();
             Container.Bind<IAudioLoader>().To<Mp3AudioLoader>().AsSingle();
         }
     }

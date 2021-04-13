@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AudioSourceController.Domains.Track
 {
-    public class TrackDisplays
+    public class TrackDisplay
     {
         private string clipName;
 
@@ -15,5 +15,12 @@ namespace AudioSourceController.Domains.Track
         public string Bpm { get; set; }
 
         public Texture2D Jacket { get; set; }
+
+        public TrackDisplay(string clipName, string bpm, Texture2D jacket)
+        {
+            this.clipName = clipName;
+            this.bpm = bpm;
+            this.jacket = jacket;
+        }
     }
 }

@@ -1,22 +1,23 @@
-using AudioSourceController.Repository.Mp3Tag.Loader;
+using AudioSourceController.Repository.TrackDisplays;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using static AudioSourceController.Constants.PathConstants;
 
 namespace AudioSourceController.Repository.Audio.Loader
 {
     public class Mp3AudioLoader : IAudioLoader
     {
-        private readonly ITagLoader tagLoader;
+        private readonly ITrackDisplaysRepository trackDisplaysRepository;
 
-        public Mp3AudioLoader(ITagLoader tagLoader)
+        public Mp3AudioLoader(ITrackDisplaysRepository trackDisplaysRepository)
         {
-            this.tagLoader = tagLoader;
+            this.trackDisplaysRepository = trackDisplaysRepository;
         }
 
-        public async UniTask<AudioClip> LoadClip(string path)
+        public async UniTask<AudioClip> LoadClip(string mp3)
         {
-            var audioData = UnityWebRequestMultimedia.GetAudioClip($"file://{path}", AudioType.MPEG);
+            var audioData = UnityWebRequestMultimedia.GetAudioClip($"file://{MP3_DATA_DIRECTORY + SEPARATOR + mp3}.mp3", AudioType.MPEG);
             await audioData.SendWebRequest();
             return DownloadHandlerAudioClip.GetContent(audioData);
         }
