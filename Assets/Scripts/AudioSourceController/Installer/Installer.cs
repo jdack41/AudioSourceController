@@ -11,8 +11,11 @@ namespace AudioSourceController.Installer
 {
     public class Installer : MonoInstaller
     {
+        [SerializeField]
+        private GameObject uiObject;
         public override void InstallBindings()
         {
+            Container.BindInstance(uiObject).WithId("uiComponent");
             Container.Bind<AudioSource>().FromComponentOn(this.gameObject).AsSingle();
             Container.Bind<ISoundSource>().To<SoundSource>().AsSingle();
             Container.Bind<IInputter>().To<KeyBoardInputter>().AsSingle();

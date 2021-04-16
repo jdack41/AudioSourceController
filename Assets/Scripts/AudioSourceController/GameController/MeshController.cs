@@ -14,6 +14,9 @@ public class MeshController : MonoBehaviour
     private IAudioLoader audioLoader;
     private AudioSource audioSource;
 
+    [Inject(Id = "uiComponent")]
+    private GameObject uiObject;
+
     [Inject]
     public void Construct(ITrackDisplaysRepository trackDisplaysRepository, IAudioLoader audioLoader, AudioSource audioSource)
     {
@@ -25,7 +28,7 @@ public class MeshController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        this.uiObject.SetActive(false);
     }
 
     private async UniTask initialize()
@@ -50,8 +53,17 @@ public class MeshController : MonoBehaviour
             await initialize();
             AudioClip clip = await audioLoader.LoadClip("DIVE");
             audioSource.clip = clip;
-            // audioSource.Play();
+            audioSource.Play();
             await trackDisplaysRepository.LoadTrackDisplays();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            uiObject.SetActive(true);
+            Debug.Log("true");
+        }
+        else if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            uiObject.SetActive(false);
         }
     }
 }

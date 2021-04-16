@@ -7,8 +7,8 @@ namespace AudioSourceController.Logic.Audio.Effecter
     public class Effecter : IEffecter
     {
         private readonly ISoundSource soundSource;
-
         private int loopCounter;
+        private float triggeredSampleTime = 0;
 
         public Effecter(ISoundSource soundSource)
         {
@@ -28,26 +28,31 @@ namespace AudioSourceController.Logic.Audio.Effecter
             soundSource.Pitch = 1;
         }
 
-        public void ApplyStutter(ref float sampleTime)
+        public void ApplyStutter()
         {
             double timeSpan = TimeSpan.FromSeconds(15d / 168d).TotalSeconds;
-            if (soundSource.SampleTime - sampleTime >= timeSpan)
+            if (soundSource.SampleTime - triggeredSampleTime >= timeSpan)
             {
                 if (this.loopCounter > 2)
                 {
-                    soundSource.SampleTime = sampleTime + (4 * (float)TimeSpan.FromSeconds(15d / 168d).TotalSeconds);
-                    sampleTime = soundSource.SampleTime;
+                    soundSource.SampleTime = triggeredSampleTime + (4 * (float)TimeSpan.FromSeconds(15d / 168d).TotalSeconds);
+                    triggeredSampleTime = soundSource.SampleTime;
                     this.loopCounter = 0;
                 }
                 else
                 {
-                    soundSource.SampleTime = sampleTime;
+                    soundSource.SampleTime = triggeredSampleTime;
                     this.loopCounter++;
                 }
             }
         }
 
-        public void ResetStutter()
+        public void SetStutterStartTime()
+        {
+            this.triggeredSampleTime = soundSource.SampleTime;
+        }
+
+        public void ResetLoopCounter()
         {
             this.loopCounter = 0;
         }

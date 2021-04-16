@@ -1,4 +1,5 @@
 using UnityEngine;
+using static AudioSourceController.Logic.Inputter.IInputter;
 
 namespace AudioSourceController.Logic.Inputter
 {
@@ -14,6 +15,11 @@ namespace AudioSourceController.Logic.Inputter
             return Input.GetKeyUp(KeyCode.A);
         }
 
+        public (Trigger start, Trigger end) GetEffect1Triggers()
+        {
+            return (this.Effect1Trigger, this.Effect1TriggerEnd);
+        }
+
         public bool Effect2Trigger()
         {
             return Input.GetKey(KeyCode.S);
@@ -22,6 +28,11 @@ namespace AudioSourceController.Logic.Inputter
         public bool Effect2TriggerEnd()
         {
             return Input.GetKeyUp(KeyCode.S);
+        }
+
+        public bool Effect1SetTrigger()
+        {
+            return Input.GetKeyDown(KeyCode.I);
         }
     }
 }

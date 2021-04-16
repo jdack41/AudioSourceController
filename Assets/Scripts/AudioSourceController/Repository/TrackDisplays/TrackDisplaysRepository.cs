@@ -41,9 +41,8 @@ namespace AudioSourceController.Repository.TrackDisplays
                 await Task.Run(() => Directory.CreateDirectory(TRACK_DETAILS_DATA_DIRECTORY));
             }
             ArrayList trackDisplays = new ArrayList();
-            string[] mp3s = Directory.GetFiles(MP3_DATA_DIRECTORY);
-            mp3s.Where(fileName => fileName.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase))
-            .ToList().ForEach(async mp3 =>
+            List<string> mp3s = Directory.GetFiles(MP3_DATA_DIRECTORY).Where(fileName => fileName.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)).ToList();
+            mp3s.ForEach(async mp3 =>
             {
                 TagData tagData = await ReadTags(mp3);
                 string dataDir = TRACK_DETAILS_DATA_DIRECTORY + "/" + tagData.TrackName;
@@ -88,10 +87,6 @@ namespace AudioSourceController.Repository.TrackDisplays
             catch (IndexOutOfRangeException)
             {
                 throw new FileLoadException("Picture Data Not Found");
-            }
-            catch (Exception)
-            {
-                throw new Exception("System Err");
             }
         }
     }

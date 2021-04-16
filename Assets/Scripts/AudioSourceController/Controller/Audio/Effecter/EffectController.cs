@@ -1,8 +1,12 @@
 using System;
+using System.Collections.Generic;
 using AudioSourceController.Domains.Audio;
 using AudioSourceController.Logic.Audio.Effecter;
 using AudioSourceController.Logic.Inputter;
 using UniRx;
+using UnityEngine;
+using static AudioSourceController.Logic.Inputter.IInputter;
+using static AudioSourceController.Constants.EffectNames;
 
 namespace AudioSourceController.Controller.Audio.Effecter
 {
@@ -12,7 +16,6 @@ namespace AudioSourceController.Controller.Audio.Effecter
         private readonly IEffecter effecter;
         private readonly ISoundSource soundSource;
         private bool isStuttering;
-        private float triggeredSampleTime = 0;
 
         public EffectController(IInputter inputter, IEffecter effecter, ISoundSource soundSource)
         {
@@ -21,30 +24,52 @@ namespace AudioSourceController.Controller.Audio.Effecter
             this.soundSource = soundSource;
         }
 
-        public IDisposable StartStutter()
+        public IDisposable StartStutter(Trigger trigger)
         {
             return Observable.EveryUpdate()
-            .Where(_ => inputter.Effect2Trigger())
+            .Where(_ => trigger())
             .Subscribe(_ =>
             {
                 if (!isStuttering)
                 {
-                    triggeredSampleTime = soundSource.SampleTime;
+                    effecter.SetStutterStartTime();
                 }
                 isStuttering = true;
-                effecter.ApplyStutter(ref triggeredSampleTime);
+                effecter.ApplyStutter();
             });
         }
 
-        public IDisposable StopStutter()
+        public IDisposable StopStutter(Trigger trigger)
         {
             return Observable.EveryUpdate()
-            .Where(_ => inputter.Effect2TriggerEnd())
+            .Where(_ => trigger())
+            .DoOnCancel(() =>
+            {
+                isStuttering = false;
+                effecter.ResetLoopCounter();
+            })
             .Subscribe(_ =>
             {
                 isStuttering = false;
-                effecter.ResetStutter();
+                effecter.ResetLoopCounter();
             });
+        }
+
+        public List<IDisposable> SubscribeEffect((Trigger start, Trigger end) trigger, string effect)
+        {
+            List<IDisposable> subscribed = new List<IDisposable>();
+            switch (effect)
+            {
+                case STUTTER:
+                    var start = StartStutter(trigger.start);
+                    var end = StopStutter(trigger.end);
+                    subscribed.Add(start);
+                    subscribed.Add(end);
+                    break;
+                case TAPESTOP:
+                    break;
+            }
+            return subscribed;
         }
 
         public IDisposable StartTapeStop()
@@ -60,6 +85,6 @@ namespace AudioSourceController.Controller.Audio.Effecter
             .Where(_ => inputter.Effect1TriggerEnd())
             .Subscribe(_ => effecter.ResetPitch());
         }
-        
+
     }
 }
