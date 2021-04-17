@@ -30,7 +30,11 @@ namespace AudioSourceController.Domains.UI
 
         public async void LoadClip()
         {
-            Debug.Log("clicked");
+            await loadClip();
+        }
+
+        private async UniTask loadClip()
+        {
             AudioClip clip = await this.loader.LoadClip(trackDisplay.FileName);
             soundSource.SetSource(clip, trackDisplay);
         }

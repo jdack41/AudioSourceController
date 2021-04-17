@@ -18,6 +18,7 @@ namespace AudioSourceController.Repository.Audio.Loader
         public async UniTask<AudioClip> LoadClip(string mp3)
         {
             var audioData = UnityWebRequestMultimedia.GetAudioClip($"file://{MP3_DATA_DIRECTORY + SEPARATOR + mp3}.mp3", AudioType.MPEG);
+            ((DownloadHandlerAudioClip)audioData.downloadHandler).streamAudio = true;
             await audioData.SendWebRequest();
             return DownloadHandlerAudioClip.GetContent(audioData);
         }

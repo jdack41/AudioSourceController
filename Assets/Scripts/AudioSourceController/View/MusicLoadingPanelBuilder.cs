@@ -11,7 +11,7 @@ using Zenject;
 
 namespace AudioSourceController.View
 {
-    public class MusicLoadingPanelBuilder : MonoBehaviour, IPanelBuilder
+    public class MusicLoadingPanelBuilder : MonoBehaviour
     {
         private Panel.Factory factory;
         private ITrackDisplaysRepository repository;
