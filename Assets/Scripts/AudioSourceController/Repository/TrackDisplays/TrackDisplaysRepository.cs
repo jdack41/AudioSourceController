@@ -37,14 +37,15 @@ namespace AudioSourceController.Repository.TrackDisplays
 
         public async UniTask<List<TrackDisplay>> LoadTrackDisplays()
         {
-            if(!Directory.Exists(TRACK_DETAILS_DATA_DIRECTORY)) {
+            if (!Directory.Exists(TRACK_DETAILS_DATA_DIRECTORY))
+            {
                 await Task.Run(() => Directory.CreateDirectory(TRACK_DETAILS_DATA_DIRECTORY));
             }
             List<TrackDisplay> trackDisplays = new List<TrackDisplay>();
             List<string> mp3s = Directory.GetFiles(MP3_DATA_DIRECTORY).Where(fileName => fileName.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)).ToList();
-            mp3s.ForEach(async mp3 =>
+            for(int i = 0; i < mp3s.Count; i++)
             {
-                TagData tagData = await ReadTags(mp3);
+                TagData tagData = await ReadTags(mp3s[i]);
                 string dataDir = TRACK_DETAILS_DATA_DIRECTORY + SEPARATOR + tagData.TrackName;
                 if (System.IO.File.Exists(dataDir))
                 {
@@ -59,7 +60,7 @@ namespace AudioSourceController.Repository.TrackDisplays
                     trackDisplays.Add(trackDisplay);
                 }
 
-            });
+            }
             return trackDisplays;
         }
 

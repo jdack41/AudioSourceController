@@ -10,11 +10,11 @@ namespace AudioSourceController.Domains.Track
 
         private Texture2D jacket;
 
-        public string ClipName { get; set; }
+        public string ClipName { get { return this.clipName; } }
 
-        public string Bpm { get; set; }
+        public string Bpm { get { return this.bpm; } }
 
-        public Texture2D Jacket { get; set; }
+        public Texture2D Jacket { get { return this.jacket; } }
 
         public TrackDisplay(string clipName, string bpm, Texture2D jacket)
         {

@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using AudioSourceController.Domains.Track;
 using AudioSourceController.Domains.UI;
 using AudioSourceController.Repository.TrackDisplays;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace AudioSourceController.View
@@ -20,15 +22,32 @@ namespace AudioSourceController.View
             this.repository = repository;
         }
 
+        private async UniTask initialize()
+        {
+            try
+            {
+                List<TrackDisplay> trackDisplays = await this.repository.LoadTrackDisplays();
+                trackDisplays.ForEach(x =>
+                {
+                    var panel = this.factory.Create(x);
+                    Texture2D texture = panel.Track.Jacket;
+                    panel.transform.GetChild(0).GetComponent<Image>().sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+                    Text trackName = panel.transform.GetChild(1).GetComponent<Text>();
+                    trackName.text = panel.Track.ClipName;
+                    Text bpm = trackName.transform.GetChild(0).GetComponent<Text>();
+                    bpm.text = panel.Track.Bpm;
+                    panel.GetComponent<RectTransform>().SetParent(transform, false);
+                });
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         async void Start()
         {
-            List<TrackDisplay> trackDisplays = await this.repository.LoadTrackDisplays();
-            Debug.Log(trackDisplays.Count);
-            trackDisplays.ForEach(x => {
-                var panel = this.factory.Create(x);
-                panel.GetComponent<RectTransform>().SetParent(transform, false);
-                Debug.Log("hoge");
-            });
+            await initialize();
         }
     }
 }

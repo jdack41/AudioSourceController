@@ -11,7 +11,7 @@ using AudioSourceController.Domains.UI;
 
 namespace AudioSourceController.Installer
 {
-    public class Installer : MonoInstaller
+    public class Installer : MonoInstaller<Installer>
     {
         [SerializeField]
         private GameObject uiObject;
