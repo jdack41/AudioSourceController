@@ -54,6 +54,7 @@ namespace AudioSourceController.Domains.Audio
             this.mixes[this.selector].clip = clip;
             this.mixes[this.selector].time = 0;
             this.track[this.selector] = track;
+            this.mixes[this.selector].Play();
         }
 
         public TrackDisplay GetTrackDisplay(int selector)

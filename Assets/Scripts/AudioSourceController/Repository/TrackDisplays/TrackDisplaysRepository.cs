@@ -50,13 +50,13 @@ namespace AudioSourceController.Repository.TrackDisplays
                 if (System.IO.File.Exists(dataDir))
                 {
                     string bpm = readBpmFromText(dataDir);
-                    TrackDisplay trackDisplay = new TrackDisplay(tagData.TrackName, bpm, tagData.JacketImage);
+                    TrackDisplay trackDisplay = new TrackDisplay(tagData.TrackName, bpm, tagData.JacketImage, System.IO.Path.GetFileNameWithoutExtension(mp3s[i]));
                     trackDisplays.Add(trackDisplay);
                 }
                 else
                 {
                     await writeTrackData(dataDir, tagData.TrackName);
-                    TrackDisplay trackDisplay = new TrackDisplay(tagData.TrackName, "120", tagData.JacketImage);
+                    TrackDisplay trackDisplay = new TrackDisplay(tagData.TrackName, "120", tagData.JacketImage, System.IO.Path.GetFileNameWithoutExtension(mp3s[i]));
                     trackDisplays.Add(trackDisplay);
                 }
 
