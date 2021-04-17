@@ -18,7 +18,7 @@ public class MeshController : MonoBehaviour
     private GameObject uiObject;
 
     [Inject]
-    public void Construct(ITrackDisplaysRepository trackDisplaysRepository, IAudioLoader audioLoader, AudioSource audioSource)
+    public void Construct(ITrackDisplaysRepository trackDisplaysRepository, IAudioLoader audioLoader,[Inject(Id = "aMix")] AudioSource audioSource)
     {
         this.trackDisplaysRepository = trackDisplaysRepository;
         this.audioLoader = audioLoader;

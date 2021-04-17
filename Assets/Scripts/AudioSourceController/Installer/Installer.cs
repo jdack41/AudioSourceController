@@ -13,10 +13,15 @@ namespace AudioSourceController.Installer
     {
         [SerializeField]
         private GameObject uiObject;
+        [SerializeField]
+        private AudioSource aMix;
+        [SerializeField]
+        private AudioSource bMix;
         public override void InstallBindings()
         {
-            Container.BindInstance(uiObject).WithId("uiComponent");
-            Container.Bind<AudioSource>().FromComponentOn(this.gameObject).AsSingle();
+            Container.BindInstance(uiObject).WithId("uiComponent").AsSingle();
+            Container.BindInstance(aMix).WithId("aMix").AsCached();
+            Container.BindInstance(bMix).WithId("bMix").AsCached();
             Container.Bind<ISoundSource>().To<SoundSource>().AsSingle();
             Container.Bind<IInputter>().To<KeyBoardInputter>().AsSingle();
             Container.Bind<IEffecter>().To<Effecter>().AsSingle();

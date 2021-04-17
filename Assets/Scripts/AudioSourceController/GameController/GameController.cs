@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AudioSourceController.Controller.Audio.Effecter;
+using AudioSourceController.Domains.Audio;
 using AudioSourceController.Logic.Inputter;
 using UnityEngine;
 using Zenject;
@@ -12,13 +13,18 @@ public class GameController : MonoBehaviour
 
     private IInputter inputter;
 
+    private ISoundSource soundSource;
+
+    public TextMesh debugText;
+
     private Dictionary<string, List<IDisposable>> subscribedEffects = new Dictionary<string, List<IDisposable>>();
 
     [Inject]
-    public void Construct(IEffectController effectController, IInputter inputter)
+    public void Construct(IEffectController effectController, IInputter inputter, ISoundSource soundSource)
     {
         this.effectController = effectController;
         this.inputter = inputter;
+        this.soundSource = soundSource;
     }
 
     // Start is called before the first frame update
@@ -35,12 +41,12 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        debugText.text = soundSource.SampleTime.ToString();
         if (inputter.Effect1SetTrigger())
         {
             if (subscribedEffects.ContainsKey("trigger1"))
             {
                 subscribedEffects["trigger1"].ForEach(x => x.Dispose());
-                var hoge = subscribedEffects.Keys;
                 subscribedEffects.Remove("trigger1");
             }
             else
