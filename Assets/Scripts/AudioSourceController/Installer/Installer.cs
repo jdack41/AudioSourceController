@@ -6,6 +6,8 @@ using AudioSourceController.Logic.Audio.Effecter;
 using AudioSourceController.Controller.Audio.Effecter;
 using AudioSourceController.Repository.Audio.Loader;
 using AudioSourceController.Repository.TrackDisplays;
+using AudioSourceController.Domains.Track;
+using AudioSourceController.Domains.UI;
 
 namespace AudioSourceController.Installer
 {
@@ -17,6 +19,8 @@ namespace AudioSourceController.Installer
         private AudioSource aMix;
         [SerializeField]
         private AudioSource bMix;
+        [SerializeField]
+        private GameObject panel;
         public override void InstallBindings()
         {
             Container.BindInstance(uiObject).WithId("uiComponent").AsSingle();
@@ -28,6 +32,7 @@ namespace AudioSourceController.Installer
             Container.Bind<IEffectController>().To<EffectController>().AsSingle();
             Container.Bind<ITrackDisplaysRepository>().To<TrackDisplaysRepository>().AsSingle();
             Container.Bind<IAudioLoader>().To<Mp3AudioLoader>().AsSingle();
+            Container.BindFactory<TrackDisplay, Panel, Panel.Factory>().FromComponentInNewPrefab(panel);
         }
     }
 }

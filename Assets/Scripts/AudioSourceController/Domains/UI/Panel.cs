@@ -13,7 +13,7 @@ namespace AudioSourceController.Domains.UI
             this.trackDisplay = trackDisplay;
             
         }
-        public class Factory : PlaceholderFactory<TrackDisplay,IPanel>
+        public class Factory : PlaceholderFactory<TrackDisplay,Panel>
         {
         }
         

@@ -7,6 +7,8 @@ using Zenject;
 using UniRx;
 using UniRx.Triggers;
 using AudioSourceController.Repository.TrackDisplays;
+using System.Collections.Generic;
+using AudioSourceController.Domains.Track;
 
 public class MeshController : MonoBehaviour
 {
@@ -54,7 +56,8 @@ public class MeshController : MonoBehaviour
             AudioClip clip = await audioLoader.LoadClip("DIVE");
             audioSource.clip = clip;
             audioSource.Play();
-            await trackDisplaysRepository.LoadTrackDisplays();
+            List<TrackDisplay> hoge = await trackDisplaysRepository.LoadTrackDisplays();
+            hoge.ForEach(x => Debug.Log(x.ClipName));
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {

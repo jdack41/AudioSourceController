@@ -35,17 +35,17 @@ namespace AudioSourceController.Repository.TrackDisplays
             }
         }
 
-        public async UniTask<ArrayList> LoadTrackDisplays()
+        public async UniTask<List<TrackDisplay>> LoadTrackDisplays()
         {
             if(!Directory.Exists(TRACK_DETAILS_DATA_DIRECTORY)) {
                 await Task.Run(() => Directory.CreateDirectory(TRACK_DETAILS_DATA_DIRECTORY));
             }
-            ArrayList trackDisplays = new ArrayList();
+            List<TrackDisplay> trackDisplays = new List<TrackDisplay>();
             List<string> mp3s = Directory.GetFiles(MP3_DATA_DIRECTORY).Where(fileName => fileName.EndsWith(".mp3", StringComparison.OrdinalIgnoreCase)).ToList();
             mp3s.ForEach(async mp3 =>
             {
                 TagData tagData = await ReadTags(mp3);
-                string dataDir = TRACK_DETAILS_DATA_DIRECTORY + "/" + tagData.TrackName;
+                string dataDir = TRACK_DETAILS_DATA_DIRECTORY + SEPARATOR + tagData.TrackName;
                 if (System.IO.File.Exists(dataDir))
                 {
                     string bpm = readBpmFromText(dataDir);
