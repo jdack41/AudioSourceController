@@ -16,7 +16,8 @@ public class GameController : MonoBehaviour
 
     private ISoundSource soundSource;
 
-    public TextMesh debugText;
+    [SerializeField]
+    private TextMesh whichSelector;
 
     private Dictionary<string, List<IDisposable>> subscribedEffects = new Dictionary<string, List<IDisposable>>();
 
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        debugText.text = soundSource.SampleTime.ToString();
+        whichSelector.text = soundSource.Selector == 0 ? "A" : "B";
         if (inputter.Effect1SetTrigger())
         {
             if (subscribedEffects.ContainsKey("trigger1"))

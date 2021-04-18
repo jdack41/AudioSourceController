@@ -9,6 +9,7 @@ using AudioSourceController.Repository.TrackDisplays;
 using AudioSourceController.Domains.Track;
 using AudioSourceController.Domains.UI;
 using AudioSourceController.Controller.App;
+using UnityEngine.Audio;
 
 namespace AudioSourceController.Installer
 {
@@ -26,11 +27,14 @@ namespace AudioSourceController.Installer
         private GameObject aMixJacketPanel;
         [SerializeField]
         private GameObject bMixJacketPanel;
+        [SerializeField]
+        private AudioMixer masterMixer;
         public override void InstallBindings()
         {
             Container.BindInstance(uiObject).WithId("uiComponent").AsCached();
             Container.BindInstance(aMix).WithId("aMix").AsCached();
             Container.BindInstance(bMix).WithId("bMix").AsCached();
+            Container.BindInstance(masterMixer).AsSingle();
             Container.BindInstance(aMixJacketPanel).WithId("aJacket").AsCached();
             Container.BindInstance(bMixJacketPanel).WithId("bJacket").AsCached();
             Container.Bind<ISoundSource>().To<SoundSource>().AsSingle();
