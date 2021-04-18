@@ -35,7 +35,7 @@ namespace AudioSourceController.View
                     Text trackName = panel.transform.GetChild(1).GetComponent<Text>();
                     trackName.text = panel.Track.ClipName;
                     Text bpm = trackName.transform.GetChild(0).GetComponent<Text>();
-                    bpm.text = panel.Track.Bpm;
+                    bpm.text += panel.Track.Bpm;
                     panel.GetComponent<RectTransform>().SetParent(transform, false);
                 });
             }

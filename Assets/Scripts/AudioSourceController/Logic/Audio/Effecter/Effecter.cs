@@ -30,12 +30,13 @@ namespace AudioSourceController.Logic.Audio.Effecter
 
         public void ApplyStutter()
         {
-            double timeSpan = Math.Floor(TimeSpan.FromSeconds(15d / 120d).TotalSeconds * 100) / 100;
+            double bpm = double.Parse(soundSource.Track.Bpm);
+            double timeSpan = Math.Floor(TimeSpan.FromSeconds(15d / bpm).TotalSeconds * 100) / 100;
             if (soundSource.SampleTime - triggeredSampleTime >= timeSpan)
             {
                 if (this.loopCounter > 2)
                 {
-                    soundSource.SampleTime = triggeredSampleTime + (4 * (float)TimeSpan.FromSeconds(15d / 120d).TotalSeconds);
+                    soundSource.SampleTime = triggeredSampleTime + (4 * (float)TimeSpan.FromSeconds(15d / bpm).TotalSeconds);
                     triggeredSampleTime = soundSource.SampleTime;
                     this.loopCounter = 0;
                 }

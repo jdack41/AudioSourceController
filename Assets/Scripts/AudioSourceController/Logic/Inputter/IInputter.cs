@@ -10,8 +10,13 @@ namespace AudioSourceController.Logic.Inputter
         bool Effect2TriggerEnd();
 
         bool Effect1SetTrigger();
+        bool MusicLoadingPanelTrigger();
+        bool SelectorChangeTrigger();
+        bool MusicPlayTrigger();
 
         delegate bool Trigger();
+        
+        // TODO: その他Triggerもキー入れ替え対応のためdelegate経由に変更
         (Trigger start, Trigger end) GetEffect1Triggers();
     }
 }

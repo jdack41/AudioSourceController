@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AudioSourceController.Controller.App;
 using AudioSourceController.Controller.Audio.Effecter;
 using AudioSourceController.Domains.Audio;
 using AudioSourceController.Logic.Inputter;
@@ -10,7 +11,7 @@ using Zenject;
 public class GameController : MonoBehaviour
 {
     private IEffectController effectController;
-
+    private IApplicationController applicationController;
     private IInputter inputter;
 
     private ISoundSource soundSource;
@@ -20,9 +21,10 @@ public class GameController : MonoBehaviour
     private Dictionary<string, List<IDisposable>> subscribedEffects = new Dictionary<string, List<IDisposable>>();
 
     [Inject]
-    public void Construct(IEffectController effectController, IInputter inputter, ISoundSource soundSource)
+    public void Construct(IEffectController effectController, IInputter inputter, ISoundSource soundSource, IApplicationController applicationController)
     {
         this.effectController = effectController;
+        this.applicationController = applicationController;
         this.inputter = inputter;
         this.soundSource = soundSource;
     }
@@ -36,6 +38,8 @@ public class GameController : MonoBehaviour
         // Trigger endTrigger = inputter.Effect2Trigger;
         // effectController.StartStutter(trigger);
         // effectController.StopStutter(endTrigger);
+        applicationController.ChangeSelector();
+        applicationController.OpenCloseMusicLoadingPanel();
     }
 
     // Update is called once per frame
@@ -53,7 +57,6 @@ public class GameController : MonoBehaviour
             {
                 List<IDisposable> subscribed = effectController.SubscribeEffect(inputter.GetEffect1Triggers(), "Stutter");
                 subscribedEffects.Add("trigger1", subscribed);
-                Debug.Log("Subscribed");
             }
         }
     }

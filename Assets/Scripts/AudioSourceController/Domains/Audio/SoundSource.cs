@@ -43,6 +43,8 @@ namespace AudioSourceController.Domains.Audio
             }
         }
 
+        public int Selector { get { return this.selector; } }
+
         public SoundSource([Inject(Id = "aMix")] AudioSource aMix, [Inject(Id = "bMix")] AudioSource bMix)
         {
             this.mixes = new AudioSource[] { aMix, bMix };
@@ -54,12 +56,21 @@ namespace AudioSourceController.Domains.Audio
             this.mixes[this.selector].clip = clip;
             this.mixes[this.selector].time = 0;
             this.track[this.selector] = track;
-            this.mixes[this.selector].Play();
         }
 
         public TrackDisplay GetTrackDisplay(int selector)
         {
             return this.track[selector];
+        }
+
+        public void SetSelector(int selector)
+        {
+            this.selector = selector;
+        }
+
+        public void PlaySoundSource()
+        {
+            this.mixes[this.selector].Play();
         }
     }
 }

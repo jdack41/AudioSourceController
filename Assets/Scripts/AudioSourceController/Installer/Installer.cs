@@ -8,6 +8,7 @@ using AudioSourceController.Repository.Audio.Loader;
 using AudioSourceController.Repository.TrackDisplays;
 using AudioSourceController.Domains.Track;
 using AudioSourceController.Domains.UI;
+using AudioSourceController.Controller.App;
 
 namespace AudioSourceController.Installer
 {
@@ -21,11 +22,17 @@ namespace AudioSourceController.Installer
         private AudioSource bMix;
         [SerializeField]
         private GameObject panel;
+        [SerializeField]
+        private GameObject aMixJacketPanel;
+        [SerializeField]
+        private GameObject bMixJacketPanel;
         public override void InstallBindings()
         {
-            Container.BindInstance(uiObject).WithId("uiComponent").AsSingle();
+            Container.BindInstance(uiObject).WithId("uiComponent").AsCached();
             Container.BindInstance(aMix).WithId("aMix").AsCached();
             Container.BindInstance(bMix).WithId("bMix").AsCached();
+            Container.BindInstance(aMixJacketPanel).WithId("aJacket").AsCached();
+            Container.BindInstance(bMixJacketPanel).WithId("bJacket").AsCached();
             Container.Bind<ISoundSource>().To<SoundSource>().AsSingle();
             Container.Bind<IInputter>().To<KeyBoardInputter>().AsSingle();
             Container.Bind<IEffecter>().To<Effecter>().AsSingle();
@@ -33,6 +40,7 @@ namespace AudioSourceController.Installer
             Container.Bind<ITrackDisplaysRepository>().To<TrackDisplaysRepository>().AsSingle();
             Container.Bind<IAudioLoader>().To<Mp3AudioLoader>().AsSingle();
             Container.BindFactory<TrackDisplay, Panel, Panel.Factory>().FromComponentInNewPrefab(panel);
+            Container.Bind<IApplicationController>().To<ApplicationController>().AsSingle();
         }
     }
 }

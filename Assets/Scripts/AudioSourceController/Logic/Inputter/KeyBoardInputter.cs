@@ -34,5 +34,20 @@ namespace AudioSourceController.Logic.Inputter
         {
             return Input.GetKeyDown(KeyCode.I);
         }
+
+        public bool MusicLoadingPanelTrigger()
+        {
+            return Input.GetKeyDown(KeyCode.Tab);
+        }
+
+        public bool SelectorChangeTrigger()
+        {
+            return Input.GetKeyDown(KeyCode.C);
+        }
+
+        public bool MusicPlayTrigger()
+        {
+            return Input.GetKeyDown(KeyCode.Space);
+        }
     }
 }

@@ -8,7 +8,10 @@ namespace AudioSourceController.Domains.Audio
         TrackDisplay Track { get; set; }
         float SampleTime { get; set; }
         float Pitch { get; set; }
+        int Selector { get; }
         void SetSource(AudioClip clip, TrackDisplay track);
         TrackDisplay GetTrackDisplay(int selector);
+        void SetSelector(int selector);
+        void PlaySoundSource();
     }
 }
