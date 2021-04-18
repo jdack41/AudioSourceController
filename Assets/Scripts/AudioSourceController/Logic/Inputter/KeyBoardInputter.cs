@@ -7,12 +7,12 @@ namespace AudioSourceController.Logic.Inputter
     {
         public bool Effect1Trigger()
         {
-            return Input.GetKey(KeyCode.A);
+            return Input.GetKey(KeyCode.F);
         }
 
         public bool Effect1TriggerEnd()
         {
-            return Input.GetKeyUp(KeyCode.A);
+            return Input.GetKeyUp(KeyCode.F);
         }
 
         public (Trigger start, Trigger end) GetEffect1Triggers()
@@ -22,12 +22,12 @@ namespace AudioSourceController.Logic.Inputter
 
         public bool Effect2Trigger()
         {
-            return Input.GetKey(KeyCode.S);
+            return Input.GetKey(KeyCode.J);
         }
 
         public bool Effect2TriggerEnd()
         {
-            return Input.GetKeyUp(KeyCode.S);
+            return Input.GetKeyUp(KeyCode.J);
         }
 
         public bool Effect1SetTrigger()

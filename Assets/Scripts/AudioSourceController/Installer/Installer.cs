@@ -10,6 +10,7 @@ using AudioSourceController.Domains.Track;
 using AudioSourceController.Domains.UI;
 using AudioSourceController.Controller.App;
 using UnityEngine.Audio;
+using AudioSourceController.Logic.Audio.Mixer;
 
 namespace AudioSourceController.Installer
 {
@@ -45,6 +46,7 @@ namespace AudioSourceController.Installer
             Container.Bind<IAudioLoader>().To<Mp3AudioLoader>().AsSingle();
             Container.BindFactory<TrackDisplay, Panel, Panel.Factory>().FromComponentInNewPrefab(panel);
             Container.Bind<IApplicationController>().To<ApplicationController>().AsSingle();
+            Container.Bind<IMixer>().To<Mixer>().AsSingle();
         }
     }
 }

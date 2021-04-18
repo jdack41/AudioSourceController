@@ -7,5 +7,6 @@ namespace AudioSourceController.Logic.Audio.Effecter
         void ApplyStutter();
         void ResetLoopCounter();
         void SetStutterStartTime();
+        void TogglePlayStopAudio();
     }
 }

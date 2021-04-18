@@ -11,5 +11,6 @@ namespace AudioSourceController.Controller.Audio.Effecter
         IDisposable StartStutter(Trigger trigger);
         IDisposable StopStutter(Trigger trigger);
         List<IDisposable> SubscribeEffect((Trigger start, Trigger end) trigger, string effect);
+        IDisposable TogglePlayStop();
     }
 }

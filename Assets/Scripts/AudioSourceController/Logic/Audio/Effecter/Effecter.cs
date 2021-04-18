@@ -57,6 +57,17 @@ namespace AudioSourceController.Logic.Audio.Effecter
         {
             this.loopCounter = 0;
         }
-
+        
+        public void TogglePlayStopAudio()
+        {
+            if(this.soundSource.IsPlaying)
+            {
+                this.soundSource.StopSoundSource();
+            }
+            else
+            {
+                this.soundSource.PlaySoundSource();
+            }
+        }
     }
 }

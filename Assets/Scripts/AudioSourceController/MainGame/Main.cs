@@ -8,7 +8,7 @@ using AudioSourceController.Logic.Inputter;
 using UnityEngine;
 using Zenject;
 
-public class GameController : MonoBehaviour
+public class Main : MonoBehaviour
 {
     private IEffectController effectController;
     private IApplicationController applicationController;
@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour
         effectController.StartTapeStop();
         effectController.StopTapeStop();
         effectController.SubscribeEffect(inputter.GetEffect1Triggers(), "Stutter");
+        effectController.TogglePlayStop();
         applicationController.ChangeSelector();
         applicationController.OpenCloseMusicLoadingPanel();
     }

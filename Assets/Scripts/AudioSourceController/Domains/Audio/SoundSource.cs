@@ -44,6 +44,7 @@ namespace AudioSourceController.Domains.Audio
         }
 
         public int Selector { get { return this.selector; } }
+        public bool IsPlaying { get { return this.mixes[this.selector].isPlaying; } }
 
         public SoundSource([Inject(Id = "aMix")] AudioSource aMix, [Inject(Id = "bMix")] AudioSource bMix)
         {
@@ -71,6 +72,11 @@ namespace AudioSourceController.Domains.Audio
         public void PlaySoundSource()
         {
             this.mixes[this.selector].Play();
+        }
+
+        public void StopSoundSource()
+        {
+            this.mixes[this.selector].Stop();
         }
     }
 }

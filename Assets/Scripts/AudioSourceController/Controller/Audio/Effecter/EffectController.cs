@@ -86,5 +86,12 @@ namespace AudioSourceController.Controller.Audio.Effecter
             .Subscribe(_ => effecter.ResetPitch());
         }
 
+        public IDisposable TogglePlayStop()
+        {
+            return Observable.EveryUpdate()
+            .Where(_ => inputter.MusicPlayTrigger())
+            .Subscribe(_ => effecter.TogglePlayStopAudio());
+        }
+
     }
 }
