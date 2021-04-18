@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using static AudioSourceController.Logic.Inputter.IInputter;
 
 namespace AudioSourceController.Controller.Audio.Effecter
 {
@@ -6,7 +8,9 @@ namespace AudioSourceController.Controller.Audio.Effecter
     {
         IDisposable StartTapeStop();
         IDisposable StopTapeStop();
-        IDisposable StartStutter();
-        IDisposable StopStutter();
+        IDisposable StartStutter(Trigger trigger);
+        IDisposable StopStutter(Trigger trigger);
+        List<IDisposable> SubscribeEffect((Trigger start, Trigger end) trigger, string effect);
+        IDisposable TogglePlayStop();
     }
 }

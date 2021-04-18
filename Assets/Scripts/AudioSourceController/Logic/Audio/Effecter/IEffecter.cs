@@ -4,7 +4,9 @@ namespace AudioSourceController.Logic.Audio.Effecter
     {
         void ApplyTapeStop();
         void ResetPitch();
-        void ApplyStutter(ref float sampleTime);
-        void ResetStutter();
+        void ApplyStutter();
+        void ResetLoopCounter();
+        void SetStutterStartTime();
+        void TogglePlayStopAudio();
     }
 }
