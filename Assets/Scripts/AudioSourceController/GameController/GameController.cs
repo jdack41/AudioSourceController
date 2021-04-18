@@ -33,12 +33,9 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // effectController.StartTapeStop();
-        // effectController.StopTapeStop();
-        // Trigger trigger = inputter.Effect1Trigger;
-        // Trigger endTrigger = inputter.Effect2Trigger;
-        // effectController.StartStutter(trigger);
-        // effectController.StopStutter(endTrigger);
+        effectController.StartTapeStop();
+        effectController.StopTapeStop();
+        effectController.SubscribeEffect(inputter.GetEffect1Triggers(), "Stutter");
         applicationController.ChangeSelector();
         applicationController.OpenCloseMusicLoadingPanel();
     }
@@ -47,18 +44,5 @@ public class GameController : MonoBehaviour
     void Update()
     {
         whichSelector.text = soundSource.Selector == 0 ? "A" : "B";
-        if (inputter.Effect1SetTrigger())
-        {
-            if (subscribedEffects.ContainsKey("trigger1"))
-            {
-                subscribedEffects["trigger1"].ForEach(x => x.Dispose());
-                subscribedEffects.Remove("trigger1");
-            }
-            else
-            {
-                List<IDisposable> subscribed = effectController.SubscribeEffect(inputter.GetEffect1Triggers(), "Stutter");
-                subscribedEffects.Add("trigger1", subscribed);
-            }
-        }
     }
 }

@@ -75,14 +75,14 @@ namespace AudioSourceController.Controller.Audio.Effecter
         public IDisposable StartTapeStop()
         {
             return Observable.EveryUpdate()
-            .Where(_ => inputter.Effect1Trigger())
+            .Where(_ => inputter.Effect2Trigger())
             .Subscribe(_ => effecter.ApplyTapeStop());
         }
 
         public IDisposable StopTapeStop()
         {
             return Observable.EveryUpdate()
-            .Where(_ => inputter.Effect1TriggerEnd())
+            .Where(_ => inputter.Effect2TriggerEnd())
             .Subscribe(_ => effecter.ResetPitch());
         }
 
