@@ -57,6 +57,8 @@ namespace AudioSourceController.Domains.Audio
             this.mixes[this.selector].clip = clip;
             this.mixes[this.selector].time = 0;
             this.track[this.selector] = track;
+            this.mixes[this.selector].Play();
+            this.mixes[this.selector].Pause();
         }
 
         public TrackDisplay GetTrackDisplay(int selector)
@@ -71,12 +73,12 @@ namespace AudioSourceController.Domains.Audio
 
         public void PlaySoundSource()
         {
-            this.mixes[this.selector].Play();
+            this.mixes[this.selector].UnPause();
         }
 
         public void StopSoundSource()
         {
-            this.mixes[this.selector].Stop();
+            this.mixes[this.selector].Pause();
         }
     }
 }

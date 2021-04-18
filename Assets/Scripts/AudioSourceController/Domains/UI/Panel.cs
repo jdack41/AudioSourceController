@@ -40,6 +40,7 @@ namespace AudioSourceController.Domains.UI
         {
             AudioClip clip = await this.loader.LoadClip(trackDisplay.FileName);
             soundSource.SetSource(clip, trackDisplay);
+            
             mixJackets[soundSource.Selector].GetComponent<Renderer>().material.mainTexture = trackDisplay.Jacket;
         }
     }
