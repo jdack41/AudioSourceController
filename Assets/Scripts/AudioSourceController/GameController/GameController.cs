@@ -19,8 +19,6 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private TextMesh whichSelector;
 
-    private Dictionary<string, List<IDisposable>> subscribedEffects = new Dictionary<string, List<IDisposable>>();
-
     [Inject]
     public void Construct(IEffectController effectController, IInputter inputter, ISoundSource soundSource, IApplicationController applicationController)
     {
