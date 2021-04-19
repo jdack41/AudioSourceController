@@ -28,6 +28,11 @@ public class Main : MonoBehaviour
         this.soundSource = soundSource;
     }
 
+    void Awake()
+    {
+        Application.targetFrameRate = 120;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
